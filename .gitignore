@@ -5,7 +5,7 @@ src/*/build
 **/*.swp
 **/*.img
 **/*.elf
-
+**/.vscode
 # gnu global files
 GPATH
 GRTAGS

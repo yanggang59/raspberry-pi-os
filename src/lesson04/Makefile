@@ -1,5 +1,5 @@
 ARMGNU ?= aarch64-linux-gnu
-
+QEMU_BASE_DIR ?= /home/thomas/workspace/qemu-8.2.1/install/bin/
 COPS = -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
 ASMOPS = -Iinclude 
 
@@ -29,3 +29,6 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
 	$(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf  $(OBJ_FILES)
 	$(ARMGNU)-objcopy $(BUILD_DIR)/kernel8.elf -O binary kernel8.img
+
+run:kernel8.img
+	${QEMU_BASE_DIR}/qemu-system-aarch64 -machine raspi3b -serial null -serial stdio -kernel ./kernel8.img
